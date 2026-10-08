@@ -16,5 +16,5 @@ Settings › Pages › Source: **Deploy from a branch**, Branch: `main` / `(root
 ## DNS (도메인 구입처)
 | 호스트 | 타입 | 값 |
 |---|---|---|
-| www | CNAME | zetta0217.github.io |
+| www | CNAME | softnine217.github.io |
 | @ | A | 185.199.108.153 / 185.199.109.153 / 185.199.110.153 / 185.199.111.153 |
