@@ -6,7 +6,7 @@
   <title>제품 문의 | Softnine</title>
   <meta name="description" content="소프트나인 제품 문의">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-  <link rel="stylesheet" href="assets/style.css?v=6">
+  <link rel="stylesheet" href="assets/style.css?v=7">
   <script>
     // 웹폰트가 준비될 때까지 화면을 숨겨 글꼴이 바뀌며 흔들리는 현상 방지 (최대 1.5초)
     (function () {
@@ -24,11 +24,11 @@
 <body>
   <header class="nav scrolled">
     <div class="wrap nav-inner">
-      <a class="logo" href="index.html"><img class="logo-mark" src="assets/img/softnine_logo.png" alt="">SOFTNINE</a>
+      <a class="logo" href="/"><img class="logo-mark" src="assets/img/softnine_logo.png" alt="">SOFTNINE</a>
       <nav>
-        <a href="index.html#products">제품</a>
-        <a href="index.html#about">회사 소개</a>
-        <a href="inquiry.html" aria-current="page">문의</a>
+        <a href="/#products">제품</a>
+        <a href="/#about">회사 소개</a>
+        <a href="/inquiry" aria-current="page">문의</a>
       </nav>
     </div>
   </header>
@@ -86,7 +86,7 @@
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_subject" id="f-subject" value="[제품 문의]">
-          <input type="hidden" name="_next" value="https://www.softnine.co.kr/inquiry.html?sent=1">
+          <input type="hidden" name="_next" value="https://www.softnine.co.kr/inquiry?sent=1">
 
           <button class="btn btn-primary" type="submit">보내기</button>
           <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
@@ -94,6 +94,14 @@
       </div>
     </section>
   </main>
+
+  <div class="modal" id="sent-modal" role="dialog" aria-modal="true" aria-labelledby="sent-title" hidden>
+    <div class="modal-box">
+      <h3 id="sent-title">문의가 접수되었습니다</h3>
+      <p>입력하신 이메일로 답변드리겠습니다.</p>
+      <button type="button" class="btn btn-primary" id="sent-close">확인</button>
+    </div>
+  </div>
 
   <footer class="footer">
     <div class="wrap footer-inner">
@@ -123,8 +131,16 @@
       status.textContent = msg;
     };
 
+    // 전송 후 FormSubmit이 ?sent=1 로 돌려보내면 접수 완료 팝업 표시
+    const modal = document.getElementById('sent-modal');
+    const closeModal = () => { modal.hidden = true; };
+    document.getElementById('sent-close').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
     if (new URLSearchParams(location.search).has('sent')) {
-      setStatus('문의가 접수되었습니다. 입력하신 이메일로 답변드리겠습니다.', 'ok');
+      history.replaceState(null, '', location.pathname); // 새로고침해도 다시 뜨지 않게
+      modal.hidden = false;
+      document.getElementById('sent-close').focus();
     }
 
     fileInput.addEventListener('change', () => {
