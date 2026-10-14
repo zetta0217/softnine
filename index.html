@@ -5,39 +5,96 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>소프트나인 | Softnine</title>
   <meta name="description" content="소프트나인 — 기업용 AI·데이터 솔루션">
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="assets/style.css?v=6">
+  <script>
+    // 웹폰트가 준비될 때까지 화면을 숨겨 글꼴이 바뀌며 흔들리는 현상 방지 (최대 1.5초)
+    (function () {
+      var root = document.documentElement;
+      if (!document.fonts || !document.fonts.load) return;
+      root.classList.add("fonts-loading");
+      var done = function () { root.classList.remove("fonts-loading"); };
+      Promise.all(["400", "600", "700", "900"].map(function (w) {
+        return document.fonts.load(w + " 1em Pretendard", "가A");
+      })).then(done, done);
+      setTimeout(done, 1500);
+    })();
+  </script>
 </head>
 <body>
-  <header class="nav">
+  <header class="nav" id="nav">
     <div class="wrap nav-inner">
-      <a class="logo" href="#">Softnine</a>
+      <a class="logo" href="#"><img class="logo-mark" src="assets/img/softnine_logo.png" alt="">SOFTNINE</a>
       <nav>
+        <a href="#products">제품</a>
         <a href="#about">회사 소개</a>
-        <a href="#contact">문의</a>
+        <a href="inquiry.html">문의</a>
       </nav>
     </div>
   </header>
 
   <main>
     <section class="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <span class="orb orb-1"></span>
+        <span class="orb orb-2"></span>
+        <span class="orb orb-3"></span>
+        <span class="grid"></span>
+      </div>
+      <div class="wrap hero-content">
+        <p class="eyebrow reveal">SOFTNINE · AI &amp; DATA</p>
+        <h1 class="reveal">데이터와 AI를<br><em>안전하게</em> 연결합니다</h1>
+        <div class="hero-actions reveal">
+          <a class="btn btn-primary" href="#products">제품 보기</a>
+        </div>
+      </div>
+      <a class="scroll-hint" href="#products" aria-label="아래로 스크롤"><span></span></a>
+    </section>
+
+    <section id="products" class="section">
       <div class="wrap">
-        <h1>데이터와 AI를<br>안전하게 연결합니다</h1>
-        <a class="btn" href="#contact">도입 문의</a>
+        <div class="section-head reveal">
+          <p class="eyebrow">PRODUCTS</p>
+          <h2>제품</h2>
+        </div>
+
+        <article class="product-card reveal">
+          <div class="product-art" aria-hidden="true"></div>
+          <div class="product-body">
+            <span class="tag">AI GATEWAY</span>
+            <div class="product-brand">
+              <img class="product-icon" src="assets/img/lavender_icon.png" alt="">
+              <img class="product-wordmark" src="assets/img/lavender_word_white.png" alt="Lavender">
+            </div>
+            <p class="product-desc">
+              사내 LLM 채팅 게이트웨이. AI 에이전트와 대화하며 여러 데이터베이스를 조회하고,
+              그 과정 전반에 보안 정책을 적용합니다.
+            </p>
+            <ul class="features">
+              <li>컬럼 마스킹</li>
+              <li>가드레일</li>
+              <li>사용자별 자원·크레딧 한도</li>
+              <li>결재</li>
+            </ul>
+          </div>
+        </article>
       </div>
     </section>
 
-    <section id="about" class="section">
-      <div class="wrap">
-        <h2>회사 소개</h2>
-        <p><!-- TODO: 회사 소개 문구 -->회사 소개 문구를 입력하세요.</p>
+    <section id="about" class="section section-alt">
+      <div class="wrap about">
+        <div class="section-head reveal">
+          <p class="eyebrow">ABOUT</p>
+          <h2>회사 소개</h2>
+        </div>
+        <p class="about-text reveal"><!-- TODO: 회사 소개 문구 -->회사 소개 문구를 입력하세요.</p>
       </div>
     </section>
 
-    <section id="contact" class="section">
-      <div class="wrap">
-        <h2>문의</h2>
+    <section id="contact" class="contact-section">
+      <div class="wrap reveal">
         <ul class="contact">
-          <li><span>이메일</span> <a href="mailto:contact@softnine.co.kr">contact@softnine.co.kr</a><!-- TODO: 확인 --></li>
+          <li><span>이메일</span> <a href="mailto:contact@softnine.co.kr">contact@softnine.co.kr</a></li>
           <li><span>전화</span> 000-0000-0000<!-- TODO --></li>
           <li><span>주소</span> 주소를 입력하세요<!-- TODO --></li>
         </ul>
@@ -46,8 +103,28 @@
   </main>
 
   <footer class="footer">
-    <div class="wrap">© <span id="y"></span> Softnine. All rights reserved.</div>
+    <div class="wrap footer-inner">
+      <span class="logo"><img class="logo-mark" src="assets/img/softnine_logo.png" alt="">SOFTNINE</span>
+      <span>© <span id="y"></span> Softnine. All rights reserved.</span>
+    </div>
   </footer>
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // 스크롤하면 내비게이션 배경 채우기
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 화면에 들어오는 요소 서서히 나타내기
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  </script>
 </body>
 </html>

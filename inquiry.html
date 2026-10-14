@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>제품 문의 | Softnine</title>
+  <meta name="description" content="소프트나인 제품 문의">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="assets/style.css?v=6">
+  <script>
+    // 웹폰트가 준비될 때까지 화면을 숨겨 글꼴이 바뀌며 흔들리는 현상 방지 (최대 1.5초)
+    (function () {
+      var root = document.documentElement;
+      if (!document.fonts || !document.fonts.load) return;
+      root.classList.add("fonts-loading");
+      var done = function () { root.classList.remove("fonts-loading"); };
+      Promise.all(["400", "600", "700", "900"].map(function (w) {
+        return document.fonts.load(w + " 1em Pretendard", "가A");
+      })).then(done, done);
+      setTimeout(done, 1500);
+    })();
+  </script>
+</head>
+<body>
+  <header class="nav scrolled">
+    <div class="wrap nav-inner">
+      <a class="logo" href="index.html"><img class="logo-mark" src="assets/img/softnine_logo.png" alt="">SOFTNINE</a>
+      <nav>
+        <a href="index.html#products">제품</a>
+        <a href="index.html#about">회사 소개</a>
+        <a href="inquiry.html" aria-current="page">문의</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="inquiry">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">INQUIRY</p>
+          <h2>제품 문의</h2>
+        </div>
+
+        <!-- FormSubmit: 첫 제출 시 받는 주소로 활성화 메일이 오며, 승인해야 이후 문의가 전달됩니다 -->
+        <form class="inquiry-form" id="inquiry-form" action="https://formsubmit.co/blumen217@naver.com" method="POST" enctype="multipart/form-data">
+          <div class="field inline">
+            <label for="f-category" class="req">카테고리</label>
+            <select id="f-category" name="카테고리" required>
+              <option value="일반">일반</option>
+              <option value="SQL 편집기">SQL 편집기</option>
+              <option value="에이전트">에이전트</option>
+              <option value="결재">결재</option>
+            </select>
+          </div>
+
+          <div class="field inline">
+            <label for="f-company">회사명</label>
+            <input id="f-company" name="회사명" type="text" maxlength="100" autocomplete="organization">
+          </div>
+
+          <div class="field inline">
+            <label for="f-email" class="req">회신 받을 이메일</label>
+            <input id="f-email" name="email" type="email" required autocomplete="email">
+          </div>
+
+          <div class="field inline">
+            <label for="f-title" class="req">제목</label>
+            <input id="f-title" name="제목" type="text" required maxlength="200">
+          </div>
+
+          <div class="field field-body">
+            <label for="f-body" class="req">내용</label>
+            <textarea id="f-body" name="내용" required></textarea>
+          </div>
+
+          <div class="field">
+            <div class="file-row">
+              <label for="f-file" class="btn btn-file">이미지 첨부</label>
+              <span class="file-name" id="file-name">선택된 파일 없음</span>
+              <button type="button" class="file-clear" id="file-clear" aria-label="첨부 삭제" hidden>×</button>
+            </div>
+            <input id="f-file" class="file-input" name="attachment" type="file" accept="image/*">
+          </div>
+
+          <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_subject" id="f-subject" value="[제품 문의]">
+          <input type="hidden" name="_next" value="https://www.softnine.co.kr/inquiry.html?sent=1">
+
+          <button class="btn btn-primary" type="submit">보내기</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="logo"><img class="logo-mark" src="assets/img/softnine_logo.png" alt="">SOFTNINE</span>
+      <span>© <span id="y"></span> Softnine. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    const MAX_FILE = 5 * 1024 * 1024; // 첨부 이미지 최대 5MB
+    const form = document.getElementById('inquiry-form');
+    const status = document.getElementById('form-status');
+    const fileInput = document.getElementById('f-file');
+    const fileName = document.getElementById('file-name');
+    const fileClear = document.getElementById('file-clear');
+
+    const clearFile = () => {
+      fileInput.value = '';
+      fileName.textContent = '선택된 파일 없음';
+      fileClear.hidden = true;
+    };
+
+    const setStatus = (msg, kind) => {
+      status.className = 'form-status' + (kind ? ' ' + kind : '');
+      status.textContent = msg;
+    };
+
+    if (new URLSearchParams(location.search).has('sent')) {
+      setStatus('문의가 접수되었습니다. 입력하신 이메일로 답변드리겠습니다.', 'ok');
+    }
+
+    fileInput.addEventListener('change', () => {
+      const f = fileInput.files[0];
+      if (!f) { clearFile(); return; }
+      if (f.size > MAX_FILE) {
+        clearFile();
+        setStatus('이미지는 5MB 이하만 첨부할 수 있습니다.', 'err');
+        return;
+      }
+      fileName.textContent = f.name;
+      fileClear.hidden = false;
+      setStatus('');
+    });
+
+    fileClear.addEventListener('click', () => { clearFile(); fileInput.focus(); });
+
+    form.addEventListener('submit', () => {
+      const data = new FormData(form);
+      document.getElementById('f-subject').value = `[제품 문의/${data.get('카테고리')}] ${data.get('제목')}`;
+      form.querySelector('button[type=submit]').disabled = true;
+      setStatus('보내는 중…');
+    });
+  </script>
+</body>
+</html>
