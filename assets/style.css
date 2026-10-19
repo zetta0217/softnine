@@ -286,9 +286,8 @@ img { max-width: 100%; display: block; }
 .lv-brand-only .product-brand { margin: 0; }
 .lv-brand-label {
   align-self: center;
-  margin-left: 8px; padding-left: 24px;
-  border-left: 1px solid var(--border);
-  font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 400; line-height: 1.2;
+  font-size: clamp(2rem, 3.6vw, 2.75rem); font-weight: 700; line-height: 1;
+  letter-spacing: -.01em;
   color: var(--text);
   white-space: nowrap;
 }
@@ -397,5 +396,6 @@ img { max-width: 100%; display: block; }
   .field.inline { grid-template-columns: 118px minmax(0, 1fr); gap: 6px; }
   .product-icon { height: 40px; }
   .product-wordmark { height: 34px; }
-  .lv-brand-label { margin-left: 2px; padding-left: 14px; font-size: 1.15rem; }
+  .lv-brand-only .product-brand { gap: 12px; flex-wrap: wrap; }
+  .lv-brand-label { font-size: 1.75rem; }
 }
