@@ -282,7 +282,8 @@ img { max-width: 100%; display: block; }
 .btn-ghost:hover { border-color: var(--accent); transform: translateY(-2px); }
 
 .lv-hero { padding: 140px 0; }
-.lv-hero:first-child { padding-top: 152px; } /* 페이지 맨 위일 때 고정 내비게이션만큼 띄움 */
+.lv-brand-only { padding-top: 152px; } /* 페이지 맨 위: 고정 내비게이션만큼 띄움 */
+.lv-brand-only .product-brand { margin: 0; }
 .lv-hero-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 56px; align-items: center; }
 .lv-hero-text { display: flex; flex-direction: column; align-items: flex-start; }
 .lv-title {
@@ -373,7 +374,7 @@ img { max-width: 100%; display: block; }
   .product-art { min-height: 300px; }
   .product-body { padding: 40px 28px; }
   .lv-hero { padding: 96px 0; }
-  .lv-hero:first-child { padding-top: 120px; }
+  .lv-brand-only { padding-top: 120px; }
   .lv-hero-inner, .feature { grid-template-columns: 1fr; gap: 32px; }
   .feature-rev .feature-text { order: 0; }
   .feature + .feature { margin-top: 88px; }
