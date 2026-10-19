@@ -6,7 +6,7 @@
   <title>소프트나인 | Softnine</title>
   <meta name="description" content="소프트나인 — 기업용 AI·데이터 솔루션">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-  <link rel="stylesheet" href="assets/style.css?v=8">
+  <link rel="stylesheet" href="assets/style.css?v=9">
   <script>
     // 웹폰트가 준비될 때까지 화면을 숨겨 글꼴이 바뀌며 흔들리는 현상 방지 (최대 1.5초)
     (function () {
@@ -58,29 +58,29 @@
           <h2>제품</h2>
         </div>
 
-        <article class="product-card reveal">
-          <div class="product-art" aria-hidden="true">
-            <video src="assets/video/lavender/01_chat.mp4" poster="assets/img/lavender/01_chat.jpg" muted autoplay loop playsinline></video>
-          </div>
-          <div class="product-body">
-            <span class="tag">AI GATEWAY</span>
-            <div class="product-brand">
+        <div class="lv-hero-inner">
+          <div class="lv-hero-text">
+            <span class="tag reveal">AI GATEWAY</span>
+            <div class="product-brand reveal">
               <img class="product-icon" src="assets/img/lavender_icon.png" alt="">
               <img class="product-wordmark" src="assets/img/lavender_word_white.png" alt="Lavender">
             </div>
-            <p class="product-desc">
+            <h3 class="lv-title reveal">AI에게 묻고,<br>데이터는 <em>안전하게</em></h3>
+            <p class="lv-lead reveal">
               사내 LLM 채팅 게이트웨이. AI 에이전트와 대화하며 여러 데이터베이스를 조회하고,
-              그 과정 전반에 보안 정책을 적용합니다.
+              그 과정 전반에 마스킹·가드레일·결재를 적용합니다.
             </p>
-            <ul class="features">
-              <li>컬럼 마스킹</li>
-              <li>가드레일</li>
-              <li>사용자별 자원·크레딧 한도</li>
-              <li>결재</li>
-            </ul>
-            <a class="btn btn-primary product-more" href="/lavender">자세히 보기 →</a>
+            <div class="hero-actions reveal">
+              <a class="btn btn-ghost" href="/lavender#features">기능 둘러보기</a>
+            </div>
           </div>
-        </article>
+          <figure class="demo reveal">
+            <div class="demo-screen">
+              <video src="assets/video/lavender/01_chat.mp4" poster="assets/img/lavender/01_chat.jpg"
+                     muted loop playsinline preload="none" aria-label="AI 에이전트와 대화하는 화면"></video>
+            </div>
+          </figure>
+        </div>
       </div>
     </section>
 
@@ -129,5 +129,6 @@
     }, { threshold: 0.15 });
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
   </script>
+  <script src="assets/demo-video.js?v=1"></script>
 </body>
 </html>

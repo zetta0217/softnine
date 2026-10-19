@@ -277,19 +277,6 @@ img { max-width: 100%; display: block; }
 .footer .logo { font-size: .9rem; color: var(--muted); }
 .footer .logo-mark { height: 20px; opacity: .75; }
 
-/* ---------- 제품 카드: 데모 영상 ---------- */
-.product-art:has(video) {
-  display: grid; place-items: center; padding: 40px;
-  background: radial-gradient(ellipse at 30% 30%, #2c2357, #1d1838 70%);
-}
-.product-art video {
-  width: 100%; height: auto;
-  border-radius: 8px;
-  border: 1px solid rgba(164, 140, 240, .3);
-  box-shadow: 0 24px 60px rgba(0,0,0,.5);
-}
-.product-more { margin-top: 32px; }
-
 /* ---------- Lavender 상세 페이지 ---------- */
 .btn-ghost { color: var(--text); border: 1px solid var(--border); }
 .btn-ghost:hover { border-color: var(--accent); transform: translateY(-2px); }
@@ -297,12 +284,12 @@ img { max-width: 100%; display: block; }
 .lv-hero { padding: 140px 0; }
 .lv-hero-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 56px; align-items: center; }
 .lv-hero-text { display: flex; flex-direction: column; align-items: flex-start; }
-.lv-hero h2 {
+.lv-title {
   font-size: clamp(2.2rem, 4.6vw, 3.6rem);
   font-weight: 400; line-height: 1.18; letter-spacing: -.02em;
   margin: 0 0 24px;
 }
-.lv-hero h2 em { font-style: normal; color: var(--accent); }
+.lv-title em { font-style: normal; color: var(--accent); }
 .lv-lead { color: var(--muted); font-size: 1.08rem; margin: 0 0 36px; max-width: 520px; }
 
 /* 영상 프레임: 밝은 화면 녹화를 어두운 배경 위에 창처럼 띄움 */
@@ -384,7 +371,6 @@ img { max-width: 100%; display: block; }
   .product-card { grid-template-columns: 1fr; }
   .product-art { min-height: 300px; }
   .product-body { padding: 40px 28px; }
-  .product-art:has(video) { min-height: 0; padding: 24px; }
   .lv-hero { padding: 96px 0; }
   .lv-hero-inner, .feature { grid-template-columns: 1fr; gap: 32px; }
   .feature-rev .feature-text { order: 0; }
