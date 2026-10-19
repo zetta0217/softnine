@@ -294,15 +294,15 @@ img { max-width: 100%; display: block; }
 .btn-ghost { color: var(--text); border: 1px solid var(--border); }
 .btn-ghost:hover { border-color: var(--accent); transform: translateY(-2px); }
 
-.lv-hero { position: relative; overflow: hidden; isolation: isolate; padding: 152px 0 120px; }
+.lv-hero { padding: 140px 0; }
 .lv-hero-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 56px; align-items: center; }
 .lv-hero-text { display: flex; flex-direction: column; align-items: flex-start; }
-.lv-hero h1 {
+.lv-hero h2 {
   font-size: clamp(2.2rem, 4.6vw, 3.6rem);
   font-weight: 400; line-height: 1.18; letter-spacing: -.02em;
   margin: 0 0 24px;
 }
-.lv-hero h1 em { font-style: normal; color: var(--accent); }
+.lv-hero h2 em { font-style: normal; color: var(--accent); }
 .lv-lead { color: var(--muted); font-size: 1.08rem; margin: 0 0 36px; max-width: 520px; }
 
 /* 영상 프레임: 밝은 화면 녹화를 어두운 배경 위에 창처럼 띄움 */
@@ -317,11 +317,33 @@ img { max-width: 100%; display: block; }
 }
 .demo-screen video { display: block; width: 100%; height: auto; cursor: zoom-in; }
 
+/* 영상 아래 컨트롤: 재생/정지 + 진행바 + 시간 */
+.vc { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
+.vc-play {
+  flex: none; width: 36px; height: 36px; padding: 0;
+  display: grid; place-items: center;
+  color: var(--text); background: rgba(164, 140, 240, .12);
+  border: 1px solid var(--border); border-radius: 50%;
+  cursor: pointer; transition: background .2s, border-color .2s;
+}
+.vc-play:hover { background: rgba(164, 140, 240, .25); border-color: var(--accent); }
+.vc-play svg { width: 16px; height: 16px; fill: currentColor; }
+.vc-seek {
+  --p: 0%;
+  flex: 1; min-width: 0; height: 4px; margin: 0;
+  appearance: none; -webkit-appearance: none;
+  background: linear-gradient(90deg, var(--accent) var(--p), rgba(164, 140, 240, .2) var(--p));
+  border-radius: 2px; cursor: pointer;
+}
+.vc-seek::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--text); border: 0; }
+.vc-seek::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--text); border: 0; }
+.vc-seek:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; }
+.vc-time { flex: none; min-width: 84px; text-align: right; font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 .section-desc { color: var(--muted); font-size: 1.05rem; margin: 18px 0 0; max-width: 680px; }
 
 .feature {
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
-  gap: 64px; align-items: center;
+  gap: 64px; align-items: start;
 }
 .feature + .feature { margin-top: 120px; }
 .feature-rev { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
@@ -346,10 +368,6 @@ img { max-width: 100%; display: block; }
 .tab.is-active { color: #fff; background: rgba(164, 140, 240, .2); border-color: var(--accent); }
 .feature-wide .tabs { margin-bottom: 24px; }
 
-.lv-cta { text-align: center; }
-.lv-cta h2 { margin-bottom: 12px; }
-.lv-cta p { color: var(--muted); margin: 0 0 32px; }
-
 /* ---------- 등장 애니메이션 ---------- */
 .reveal { opacity: 0; transform: translateY(32px); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
 .reveal.in { opacity: 1; transform: none; }
@@ -367,7 +385,7 @@ img { max-width: 100%; display: block; }
   .product-art { min-height: 300px; }
   .product-body { padding: 40px 28px; }
   .product-art:has(video) { min-height: 0; padding: 24px; }
-  .lv-hero { padding: 120px 0 80px; }
+  .lv-hero { padding: 96px 0; }
   .lv-hero-inner, .feature { grid-template-columns: 1fr; gap: 32px; }
   .feature-rev .feature-text { order: 0; }
   .feature + .feature { margin-top: 88px; }

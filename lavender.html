@@ -24,7 +24,7 @@
 <body>
   <header class="nav" id="nav">
     <div class="wrap nav-inner">
-      <a class="logo" href="/"><img class="logo-mark" src="assets/img/softnine_logo.png" alt="">SOFTNINE</a>
+      <a class="logo" href="/"><img class="logo-mark" src="assets/img/softnine_logo.png?v=3" alt="SOFTNINE"></a>
       <nav>
         <a href="/#products" aria-current="page">제품</a>
         <a href="/#about">회사 소개</a>
@@ -34,12 +34,24 @@
   </header>
 
   <main>
-    <section class="lv-hero">
+    <section class="hero">
       <div class="hero-bg" aria-hidden="true">
         <span class="orb orb-1"></span>
         <span class="orb orb-2"></span>
+        <span class="orb orb-3"></span>
         <span class="grid"></span>
       </div>
+      <div class="wrap hero-content">
+        <p class="eyebrow reveal">SOFTNINE · AI &amp; DATA</p>
+        <h1 class="reveal">데이터와 AI를<br><em>안전하게</em> 연결합니다</h1>
+        <div class="hero-actions reveal">
+          <a class="btn btn-ghost" href="#lavender">제품 보기</a>
+        </div>
+      </div>
+      <a class="scroll-hint" href="#lavender" aria-label="아래로 스크롤"><span></span></a>
+    </section>
+
+    <section id="lavender" class="lv-hero">
       <div class="wrap lv-hero-inner">
         <div class="lv-hero-text">
           <span class="tag reveal">AI GATEWAY</span>
@@ -47,13 +59,12 @@
             <img class="product-icon" src="assets/img/lavender_icon.png" alt="">
             <img class="product-wordmark" src="assets/img/lavender_word_white.png" alt="Lavender">
           </div>
-          <h1 class="reveal">AI에게 묻고,<br>데이터는 <em>안전하게</em></h1>
+          <h2 class="reveal">AI에게 묻고,<br>데이터는 <em>안전하게</em></h2>
           <p class="lv-lead reveal">
             사내 LLM 채팅 게이트웨이. AI 에이전트와 대화하며 여러 데이터베이스를 조회하고,
             그 과정 전반에 마스킹·가드레일·결재를 적용합니다.
           </p>
           <div class="hero-actions reveal">
-            <a class="btn btn-primary" href="/inquiry">도입 문의</a>
             <a class="btn btn-ghost" href="#features">기능 둘러보기</a>
           </div>
         </div>
@@ -158,18 +169,11 @@
       </div>
     </section>
 
-    <section class="section lv-cta">
-      <div class="wrap reveal">
-        <h2>Lavender 도입을 검토하고 계신가요?</h2>
-        <p>데모와 도입 상담을 도와드립니다.</p>
-        <a class="btn btn-primary" href="/inquiry">도입 문의</a>
-      </div>
-    </section>
   </main>
 
   <footer class="footer">
     <div class="wrap footer-inner">
-      <span class="logo"><img class="logo-mark" src="assets/img/softnine_logo.png" alt="">SOFTNINE</span>
+      <span class="logo"><img class="logo-mark" src="assets/img/softnine_logo.png?v=3" alt="SOFTNINE"></span>
       <span>© <span id="y"></span> Softnine. All rights reserved.</span>
     </div>
   </footer>
@@ -191,14 +195,19 @@
     }, { threshold: 0.15 });
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
-    // 영상은 화면에 보일 때만 재생
+    // 영상은 화면에 보일 때만 재생 (직접 정지한 영상은 다시 틀지 않음)
     const videos = document.querySelectorAll('.demo video');
     const vio = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
-        if (e.isIntersecting) e.target.play().catch(() => {});
+        if (e.isIntersecting) { if (!e.target.dataset.userPaused) e.target.play().catch(() => {}); }
         else e.target.pause();
       });
     }, { threshold: 0.4 });
+
+    const ICON_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+    const ICON_PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
+    const fmt = (s) => isFinite(s) ? Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0') : '-:--';
+
     videos.forEach((v) => {
       vio.observe(v);
       // 누르면 전체 화면으로 크게 보기
@@ -206,6 +215,46 @@
         if (v.requestFullscreen) v.requestFullscreen();
         else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
       });
+
+      // 영상 아래 재생/정지 버튼 + 진행바 + 시간
+      const bar = document.createElement('div');
+      bar.className = 'vc';
+      bar.innerHTML =
+        '<button class="vc-play" type="button"></button>' +
+        '<input class="vc-seek" type="range" min="0" max="1000" step="1" value="0" aria-label="재생 위치">' +
+        '<span class="vc-time">0:00 / -:--</span>';
+      v.closest('.demo').appendChild(bar);
+      const btn = bar.querySelector('.vc-play');
+      const seek = bar.querySelector('.vc-seek');
+      const time = bar.querySelector('.vc-time');
+      let dragging = false;
+
+      const syncBtn = () => {
+        btn.innerHTML = v.paused ? ICON_PLAY : ICON_PAUSE;
+        btn.setAttribute('aria-label', v.paused ? '재생' : '정지');
+      };
+      const syncTime = () => {
+        const p = v.duration ? v.currentTime / v.duration : 0;
+        if (!dragging) seek.value = Math.round(p * 1000);
+        seek.style.setProperty('--p', (seek.value / 10) + '%');
+        time.textContent = fmt(v.currentTime) + ' / ' + fmt(v.duration);
+      };
+      syncBtn();
+
+      btn.addEventListener('click', () => {
+        if (v.paused) { delete v.dataset.userPaused; v.play().catch(() => {}); }
+        else { v.dataset.userPaused = '1'; v.pause(); }
+      });
+      seek.addEventListener('input', () => {
+        dragging = true;
+        if (v.duration) v.currentTime = seek.value / 1000 * v.duration;
+        syncTime();
+      });
+      seek.addEventListener('change', () => { dragging = false; });
+      v.addEventListener('play', syncBtn);
+      v.addEventListener('pause', syncBtn);
+      v.addEventListener('timeupdate', syncTime);
+      v.addEventListener('loadedmetadata', syncTime);
     });
 
     // 탭을 누르면 같은 자리의 영상을 바꿔 재생
@@ -221,6 +270,7 @@
         });
         video.poster = 'assets/img/lavender/' + tab.dataset.src + '.jpg';
         video.src = 'assets/video/lavender/' + tab.dataset.src + '.mp4';
+        delete video.dataset.userPaused;
         video.play().catch(() => {});
       });
     });
