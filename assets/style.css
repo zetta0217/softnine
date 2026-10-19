@@ -277,6 +277,79 @@ img { max-width: 100%; display: block; }
 .footer .logo { font-size: .9rem; color: var(--muted); }
 .footer .logo-mark { height: 20px; opacity: .75; }
 
+/* ---------- 제품 카드: 데모 영상 ---------- */
+.product-art:has(video) {
+  display: grid; place-items: center; padding: 40px;
+  background: radial-gradient(ellipse at 30% 30%, #2c2357, #1d1838 70%);
+}
+.product-art video {
+  width: 100%; height: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(164, 140, 240, .3);
+  box-shadow: 0 24px 60px rgba(0,0,0,.5);
+}
+.product-more { margin-top: 32px; }
+
+/* ---------- Lavender 상세 페이지 ---------- */
+.btn-ghost { color: var(--text); border: 1px solid var(--border); }
+.btn-ghost:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+.lv-hero { position: relative; overflow: hidden; isolation: isolate; padding: 152px 0 120px; }
+.lv-hero-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 56px; align-items: center; }
+.lv-hero-text { display: flex; flex-direction: column; align-items: flex-start; }
+.lv-hero h1 {
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 400; line-height: 1.18; letter-spacing: -.02em;
+  margin: 0 0 24px;
+}
+.lv-hero h1 em { font-style: normal; color: var(--accent); }
+.lv-lead { color: var(--muted); font-size: 1.08rem; margin: 0 0 36px; max-width: 520px; }
+
+/* 영상 프레임: 밝은 화면 녹화를 어두운 배경 위에 창처럼 띄움 */
+.demo { margin: 0; }
+.demo-screen {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid rgba(164, 140, 240, .3);
+  box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 60px rgba(123, 92, 224, .18);
+}
+.demo-screen video { display: block; width: 100%; height: auto; cursor: zoom-in; }
+
+.section-desc { color: var(--muted); font-size: 1.05rem; margin: 18px 0 0; max-width: 680px; }
+
+.feature {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+  gap: 64px; align-items: center;
+}
+.feature + .feature { margin-top: 120px; }
+.feature-rev { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
+.feature-rev .feature-text { order: 2; }
+.feature-no { display: block; font-size: .85rem; font-weight: 700; letter-spacing: .2em; color: var(--gold); margin-bottom: 12px; }
+.feature h3 { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 900; line-height: 1.3; margin: 0 0 16px; }
+.feature p { color: var(--muted); font-size: 1.05rem; margin: 0; }
+.feature .tabs { margin-top: 28px; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.tab {
+  font: inherit; font-size: .9rem; font-weight: 600;
+  color: var(--muted);
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color .2s, background .2s, border-color .2s;
+}
+.tab:hover { color: var(--text); border-color: var(--accent); }
+.tab.is-active { color: #fff; background: rgba(164, 140, 240, .2); border-color: var(--accent); }
+.feature-wide .tabs { margin-bottom: 24px; }
+
+.lv-cta { text-align: center; }
+.lv-cta h2 { margin-bottom: 12px; }
+.lv-cta p { color: var(--muted); margin: 0 0 32px; }
+
 /* ---------- 등장 애니메이션 ---------- */
 .reveal { opacity: 0; transform: translateY(32px); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
 .reveal.in { opacity: 1; transform: none; }
@@ -293,6 +366,11 @@ img { max-width: 100%; display: block; }
   .product-card { grid-template-columns: 1fr; }
   .product-art { min-height: 300px; }
   .product-body { padding: 40px 28px; }
+  .product-art:has(video) { min-height: 0; padding: 24px; }
+  .lv-hero { padding: 120px 0 80px; }
+  .lv-hero-inner, .feature { grid-template-columns: 1fr; gap: 32px; }
+  .feature-rev .feature-text { order: 0; }
+  .feature + .feature { margin-top: 88px; }
 }
 @media (max-width: 600px) {
   .wrap { padding: 0 16px; }

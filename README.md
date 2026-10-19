@@ -6,7 +6,11 @@
 
 ## 구성
 - `index.html` — 메인 페이지 (소개 / 제품 / 문의)
+- `lavender.html` — Lavender 제품 소개 페이지 (`/lavender`)
+- `inquiry.html` — 제품 문의 페이지 (`/inquiry`)
 - `assets/style.css` — 스타일
+- `assets/video/lavender/` — 기능 시연 영상 (H.264, 소리 없음, faststart)
+- `assets/img/lavender/` — 영상 썸네일(poster). 영상 이름과 같은 이름의 `.jpg`
 - `CNAME` — 커스텀 도메인 (`www.softnine.co.kr`)
 
 ## 배포
