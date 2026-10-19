@@ -6,7 +6,7 @@
   <title>Lavender | Softnine</title>
   <meta name="description" content="Lavender — 사내 LLM 채팅 게이트웨이. AI 에이전트로 데이터베이스를 조회하고, 마스킹·가드레일·결재로 안전하게 통제합니다.">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-  <link rel="stylesheet" href="assets/style.css?v=13">
+  <link rel="stylesheet" href="assets/style.css?v=14">
   <script>
     // 웹폰트가 준비될 때까지 화면을 숨겨 글꼴이 바뀌며 흔들리는 현상 방지 (최대 1.5초)
     (function () {
@@ -35,12 +35,25 @@
 
   <main>
     <section id="lavender" class="lv-brand-only">
+      <div class="hero-bg" aria-hidden="true">
+        <span class="orb orb-1"></span>
+        <span class="orb orb-2"></span>
+        <span class="grid"></span>
+      </div>
       <div class="wrap">
         <h1 class="product-brand reveal">
           <img class="product-icon" src="assets/img/lavender_icon.png" alt="">
           <img class="product-wordmark" src="assets/img/lavender_word_white.png" alt="Lavender">
           <span class="lv-brand-label">기능 소개</span>
         </h1>
+        <p class="lv-lead reveal">사내 LLM 채팅 게이트웨이 — AI로 DB를 조회하고, 보안 정책으로 통제합니다.</p>
+        <nav class="jump reveal" aria-label="기능 바로가기">
+          <a href="#f-query">데이터 조회</a>
+          <a href="#f-guard">가드레일</a>
+          <a href="#f-mask">컬럼 마스킹</a>
+          <a href="#f-edit">셀 편집</a>
+          <a href="#f-approval">결재</a>
+        </nav>
       </div>
     </section>
 
@@ -51,7 +64,7 @@
           <h2>보는 대로 동작합니다</h2>
         </div>
 
-        <article class="feature reveal">
+        <article id="f-query" class="feature reveal">
           <div class="feature-text">
             <span class="feature-no">01</span>
             <h3>말로 묻는 데이터 조회</h3>
@@ -70,7 +83,7 @@
           </figure>
         </article>
 
-        <article class="feature feature-rev reveal">
+        <article id="f-guard" class="feature feature-rev reveal">
           <div class="feature-text">
             <span class="feature-no">02</span>
             <h3>가드레일</h3>
@@ -84,7 +97,7 @@
           </figure>
         </article>
 
-        <article class="feature reveal">
+        <article id="f-mask" class="feature reveal">
           <div class="feature-text">
             <span class="feature-no">03</span>
             <h3>컬럼 마스킹</h3>
@@ -98,7 +111,7 @@
           </figure>
         </article>
 
-        <article class="feature feature-rev reveal">
+        <article id="f-edit" class="feature feature-rev reveal">
           <div class="feature-text">
             <span class="feature-no">04</span>
             <h3>결과 표에서 바로 편집</h3>
@@ -114,7 +127,7 @@
       </div>
     </section>
 
-    <section class="section section-alt">
+    <section id="f-approval" class="section section-alt">
       <div class="wrap">
         <div class="section-head reveal">
           <p class="eyebrow">APPROVAL</p>

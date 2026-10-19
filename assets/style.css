@@ -282,7 +282,23 @@ img { max-width: 100%; display: block; }
 .btn-ghost:hover { border-color: var(--accent); transform: translateY(-2px); }
 
 .lv-hero { padding: 140px 0; }
-.lv-brand-only { padding-top: 152px; } /* 페이지 맨 위: 고정 내비게이션만큼 띄움 */
+.lv-brand-only { /* 페이지 맨 위: 고정 내비게이션만큼 띄움 */
+  position: relative; overflow: hidden; isolation: isolate;
+  padding: 152px 0 40px;
+}
+.lv-brand-only .lv-lead { margin: 20px 0 28px; max-width: none; }
+.jump { display: flex; flex-wrap: wrap; gap: 10px; }
+.jump a {
+  font-size: .9rem; font-weight: 600;
+  color: var(--text);
+  padding: 8px 16px;
+  background: rgba(164, 140, 240, .1);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  transition: background .2s, border-color .2s;
+}
+.jump a:hover { background: rgba(164, 140, 240, .22); border-color: var(--accent); }
+.feature, #f-approval { scroll-margin-top: 96px; }
 .lv-brand-only .product-brand { margin: 0; }
 .lv-brand-label {
   align-self: center;
