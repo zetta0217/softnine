@@ -299,6 +299,7 @@ img { max-width: 100%; display: block; }
 }
 .jump a:hover { background: rgba(164, 140, 240, .22); border-color: var(--accent); }
 .feature, #f-approval { scroll-margin-top: 96px; }
+.lv-brand-only .eyebrow { margin-bottom: 22px; }
 .lv-brand-only .product-brand { margin: 0; flex-wrap: wrap; row-gap: 20px; }
 .lv-brand-label {
   align-self: center;
