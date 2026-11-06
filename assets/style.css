@@ -102,7 +102,7 @@ img { max-width: 100%; display: block; }
 
 .scroll-hint {
   position: absolute; left: 50%; bottom: 32px; transform: translateX(-50%);
-  width: 28px; height: 40px;
+  width: 28px; height: 46px;
 }
 .scroll-hint span {
   position: absolute; left: 50%; width: 14px; height: 14px; margin-left: -7px;
@@ -110,8 +110,9 @@ img { max-width: 100%; display: block; }
   transform: rotate(45deg); opacity: 0;
   animation: chevron 1.6s ease-in-out infinite;
 }
-.scroll-hint span:nth-child(1) { top: 4px; }
-.scroll-hint span:nth-child(2) { top: 16px; animation-delay: .2s; }
+.scroll-hint span:nth-child(1) { top: 2px; }
+.scroll-hint span:nth-child(2) { top: 13px; animation-delay: .15s; }
+.scroll-hint span:nth-child(3) { top: 24px; animation-delay: .3s; }
 .scroll-hint:hover span { border-color: var(--text); }
 @keyframes chevron {
   0%   { opacity: 0; transform: translateY(-4px) rotate(45deg); }
